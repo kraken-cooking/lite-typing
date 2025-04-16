@@ -1,0 +1,38 @@
+{
+  "tests": [
+    {
+      "id": "1",
+      "text": "The quick brown fox jumps over the lazy dog. This is a sample text for typing practice. Practice makes perfect, and consistent typing helps improve your speed and accuracy.",
+      "createdAt": "2024-04-15T12:00:00Z",
+      "timesUsed": 10,
+      "logs": [
+        {
+          "id": "1",
+          "userId": "user1",
+          "wpm": 60,
+          "accuracy": 95,
+          "errors": 2,
+          "duration": 30,
+          "createdAt": "2024-04-15T12:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1744762198802",
+      "text": "This component is rendered entirely on the server, which allows for securely fetching data such as JSON files or talking directly to your database.",
+      "createdAt": "2025-04-16T00:09:58.802Z",
+      "timesUsed": 1,
+      "logs": [
+        {
+          "userId": "anonymous",
+          "wpm": 214,
+          "accuracy": 3,
+          "errors": 142,
+          "duration": 60,
+          "id": "1744762785858",
+          "createdAt": "2025-04-16T00:19:45.858Z"
+        }
+      ]
+    }
+  ]
+}
