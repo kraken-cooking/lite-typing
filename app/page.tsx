@@ -49,7 +49,16 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl font-bold text-center mb-8">Lite Typing Test</h1>
+        <div className="flex flex-col items-center mb-8">
+          <img 
+            src="/logo.png" 
+            alt="Lite Typing Test Logo" 
+            className="w-24 h-24 mb-4"
+            width={96}
+            height={96}
+          />
+          <h1 className="text-4xl font-bold text-center">Lite Typing Test</h1>
+        </div>
         <TypingTest onComplete={handleTestComplete} />
       </div>
     </main>

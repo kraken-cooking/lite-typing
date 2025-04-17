@@ -15,7 +15,7 @@ export default function AdminLogin() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Implement proper authentication
-    if (username === "admin" && password === "admin123") {
+    if (username === "admin" && password === "admin1231@") {
       localStorage.setItem("adminAuth", "true");
       router.push("/admin/dashboard");
     } else {
