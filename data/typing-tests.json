@@ -16,14 +16,14 @@
     },
     {
       "id": "1744847477003",
-      "text": "The city never sleeps. Streets buzz with traffic, people hurry to work, and shops open early to greet eager customers. Skyscrapers touch the sky while lights blink like stars at night. Despite the chaos, there's beauty in the rhythm of urban life. Everyone moves with purpose, following the unseen beat of the city’s heart.",
+      "text": "The city never sleeps. Streets buzz with traffic, people hurry to work, and shops open early to greet eager customers. Skyscrapers touch the sky while lights blink like stars at night. Despite the chaos, there's beauty in the rhythm of urban life. Everyone moves with purpose, following the unseen beat of the city's heart.",
       "createdAt": "2025-04-16T23:51:17.003Z",
       "timesUsed": 0,
       "logs": []
     },
     {
       "id": "1744847489768",
-      "text": "The sun rises over the calm sea, casting golden light on the shore. Children laugh as they build sandcastles, while the waves gently roll in and out. Seagulls call overhead, and the scent of salt fills the air. It’s the perfect day to relax, breathe deeply, and enjoy the simple pleasures of nature.",
+      "text": "The sun rises over the calm sea, casting golden light on the shore. Children laugh as they build sandcastles, while the waves gently roll in and out. Seagulls call overhead, and the scent of salt fills the air. It's the perfect day to relax, breathe deeply, and enjoy the simple pleasures of nature.",
       "createdAt": "2025-04-16T23:51:29.768Z",
       "timesUsed": 0,
       "logs": []
@@ -37,18 +37,17 @@
     },
     {
       "id": "1744847506343",
-      "text": "Raindrops patter on the windowpane, soft and steady. The sky is grey, and the world outside is wrapped in a quiet hush. It’s a perfect day for warm tea, cozy blankets, and getting lost in a good book. Rainy days remind us to slow down and enjoy life’s small comforts.",
+      "text": "Raindrops patter on the windowpane, soft and steady. The sky is grey, and the world outside is wrapped in a quiet hush. It's a perfect day for warm tea, cozy blankets, and getting lost in a good book. Rainy days remind us to slow down and enjoy life's small comforts.",
       "createdAt": "2025-04-16T23:51:46.343Z",
       "timesUsed": 0,
       "logs": []
     },
     {
       "id": "1744847516042",
-      "text": "Cooking is more than just making food—it's a way to create memories. The sound of sizzling, the smell of spices, the satisfaction of a well-prepared dish—each part brings joy. Whether cooking for yourself or loved ones, it’s a way to show care and creativity.",
+      "text": "Cooking is more than just making food—it's a way to create memories. The sound of sizzling, the smell of spices, the satisfaction of a well-prepared dish—each part brings joy. Whether cooking for yourself or loved ones, it's a way to show care and creativity.",
       "createdAt": "2025-04-16T23:51:56.042Z",
       "timesUsed": 0,
-      "logs": [
-      ]
+      "logs": []
     },
     {
       "id": "1744847524922",
@@ -59,15 +58,14 @@
     },
     {
       "id": "1744847533510",
-      "text": "From the tiniest insects to the largest whales, the animal kingdom is full of wonder. Each creature plays a part in nature’s balance. Birds migrate, bees pollinate, and predators keep populations in check. Observing animals can teach us about survival, teamwork, and the beauty of diversity.",
+      "text": "From the tiniest insects to the largest whales, the animal kingdom is full of wonder. Each creature plays a part in nature's balance. Birds migrate, bees pollinate, and predators keep populations in check. Observing animals can teach us about survival, teamwork, and the beauty of diversity.",
       "createdAt": "2025-04-16T23:52:13.510Z",
       "timesUsed": 0,
-      "logs": [
-      ]
+      "logs": []
     },
     {
       "id": "1744847540712",
-      "text": "Music speaks when words fail. A melody can lift your mood, a rhythm can get your feet moving, and a lyric can touch your heart. Whether classical or modern, music connects people across cultures and generations. It’s one of humanity’s most powerful forms of expression.",
+      "text": "Music speaks when words fail. A melody can lift your mood, a rhythm can get your feet moving, and a lyric can touch your heart. Whether classical or modern, music connects people across cultures and generations. It's one of humanity's most powerful forms of expression.",
       "createdAt": "2025-04-16T23:52:20.712Z",
       "timesUsed": 0,
       "logs": []
@@ -76,12 +74,22 @@
       "id": "1744847551306",
       "text": "Leaves crunch underfoot as you walk along a forest trail. Sunlight filters through the canopy, casting dancing shadows on the ground. The air smells of pine and earth, and birds sing from above. A walk in the forest is peaceful, grounding, and full of quiet discoveries.",
       "createdAt": "2025-04-16T23:52:31.306Z",
-      "timesUsed": 0,
-      "logs": []
+      "timesUsed": 1,
+      "logs": [
+        {
+          "userId": "anonymous",
+          "wpm": 68,
+          "accuracy": 41,
+          "errors": 158,
+          "duration": 60,
+          "id": "1744936189096",
+          "createdAt": "2025-04-18T00:29:49.096Z"
+        }
+      ]
     },
     {
       "id": "1744847561165",
-      "text": "The ground is blanketed in white, and your breath forms clouds in the chilly air. Frost sparkles on tree branches, and the world feels still. There’s a certain magic in winter mornings—a reminder that even in cold and silence, beauty thrives.",
+      "text": "The ground is blanketed in white, and your breath forms clouds in the chilly air. Frost sparkles on tree branches, and the world feels still. There's a certain magic in winter mornings—a reminder that even in cold and silence, beauty thrives.",
       "createdAt": "2025-04-16T23:52:41.165Z",
       "timesUsed": 0,
       "logs": []

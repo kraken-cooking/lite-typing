@@ -84,13 +84,19 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
     // Calculate error rate (percentage of characters that were errors)
     const errorRate = state.errors / chars;
 
-    // Enhanced penalty: subtract 2 WPM for every 1% of errors
-    const penalty = errorRate * 100 * 2;
-    const adjustedWpm = Math.max(0, Math.round(rawWpm - penalty));
+    // Enhanced progressive penalty:
+    // - Base penalty: 3 WPM for every 1% of errors
+    // - Additional penalty: 2 WPM for every 1% above 5% error rate
+    // - Maximum penalty: 50% of raw WPM
+    const basePenalty = errorRate * 100 * 3;
+    const additionalPenalty = Math.max(0, (errorRate * 100 - 5) * 2);
+    const totalPenalty = Math.min(basePenalty + additionalPenalty, rawWpm * 0.5);
+    
+    const adjustedWpm = Math.max(0, Math.round(rawWpm - totalPenalty));
 
     const accuracy = Math.round(((chars - state.errors) / chars) * 100);
 
-    return { wpm: adjustedWpm, accuracy, rawWpm, penalty };
+    return { wpm: adjustedWpm, accuracy, rawWpm, penalty: totalPenalty };
   }, [state]);
 
   const getProgress = useCallback(() => {
@@ -138,6 +144,7 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
       isComplete: false,
       currentWordIndex: 0,
     }));
+    setElapsedTime(0);
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -159,6 +166,7 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
           isComplete: false,
           currentWordIndex: 0,
         });
+        setElapsedTime(0);
       }
     } catch (error) {
       console.error("Error fetching new test:", error);
