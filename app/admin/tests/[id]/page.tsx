@@ -48,16 +48,9 @@ export default function TestDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  const params = useParams<{ id: string; }>()
+  const params = useParams<{ id: string }>();
 
   useEffect(() => {
-    // Check authentication
-    const isAuthenticated = localStorage.getItem("adminAuth");
-    if (!isAuthenticated) {
-      router.push("/admin");
-      return;
-    }
-
     // Fetch test details from JSON file
     const fetchTest = async () => {
       try {
@@ -146,7 +139,9 @@ export default function TestDetails() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="p-6 border rounded-lg">
           <h3 className="text-lg font-semibold mb-2">Test Text</h3>
-          <p className="text-muted-foreground whitespace-pre-wrap">{test.text}</p>
+          <p className="text-muted-foreground whitespace-pre-wrap">
+            {test.text}
+          </p>
         </div>
         <div className="p-6 border rounded-lg">
           <h3 className="text-lg font-semibold mb-2">Times Used</h3>
@@ -157,7 +152,8 @@ export default function TestDetails() {
           <p className="text-3xl font-bold">
             {test.logs.length > 0
               ? Math.round(
-                  test.logs.reduce((sum, log) => sum + log.wpm, 0) / test.logs.length
+                  test.logs.reduce((sum, log) => sum + log.wpm, 0) /
+                    test.logs.length
                 )
               : 0}
           </p>
@@ -195,4 +191,4 @@ export default function TestDetails() {
       </div>
     </div>
   );
-} 
+}

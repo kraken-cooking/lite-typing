@@ -1,82 +1,58 @@
-import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
-const DATA_FILE = path.join(process.cwd(), 'data/typing-tests.json');
+export async function POST(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id: testId } = await params;
+  const { userId, wpm, accuracy, errors, duration } = await request.json();
 
-type TypingTest = {
-  id: string;
-  text: string;
-  createdAt: string;
-  timesUsed: number;
-  logs: TypingLog[];
-};
-
-type TypingLog = {
-  id: string;
-  userId: string;
-  wpm: number;
-  accuracy: number;
-  errors: number;
-  duration: number;
-  createdAt: string;
-};
-
-type DataFile = {
-  tests: TypingTest[];
-};
-
-async function readDataFile(): Promise<DataFile> {
   try {
-    const data = await fs.readFile(DATA_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.log(error)
-    return { tests: [] };
-  }
-}
+    // First update the timesUsed counter on the test
+    await prisma.typingTest.update({
+      where: { id: testId },
+      data: { timesUsed: { increment: 1 } },
+    });
 
-async function writeDataFile(data: DataFile) {
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
+    // Then create the log entry
+    const log = await prisma.typingLog.create({
+      data: {
+        userId,
+        wpm,
+        accuracy,
+        errors,
+        duration,
+        testId,
+      },
+    });
+
+    return NextResponse.json(log);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to create log" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const data = await readDataFile();
-  const {id} = await params
-  const test = data.tests.find(test => test.id === id);
-  
-  if (!test) {
-    return NextResponse.json({ error: 'Test not found' }, { status: 404 });
-  }
-  
-  return NextResponse.json(test.logs);
-}
+  const { id: testId } = await params;
 
-export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const logData = await request.json();
-  const data = await readDataFile();
-  const {id} = await params
-  
-  const testIndex = data.tests.findIndex(test => test.id === id);
-  if (testIndex === -1) {
-    return NextResponse.json({ error: 'Test not found' }, { status: 404 });
+  try {
+    const logs = await prisma.typingLog.findMany({
+      where: { testId },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return NextResponse.json(logs);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch logs" },
+      { status: 500 }
+    );
   }
-  
-  const newLog: TypingLog = {
-    ...logData,
-    id: Date.now().toString(),
-    createdAt: new Date().toISOString(),
-  };
-  
-  data.tests[testIndex].logs.push(newLog);
-  data.tests[testIndex].timesUsed += 1;
-  
-  await writeDataFile(data);
-  return NextResponse.json(newLog);
-} 
+}

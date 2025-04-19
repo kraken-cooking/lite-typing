@@ -1,5 +1,4 @@
-
-
+// Types from Prisma schema
 type TypingTest = {
   id: string;
   text: string;
@@ -18,12 +17,11 @@ type TypingLog = {
   createdAt: string;
 };
 
-
-
+// API functions - All data operations now go through PostgreSQL via API routes
 export async function getAllTests(): Promise<TypingTest[]> {
-  const response = await fetch('/api/typing-tests');
+  const response = await fetch("/api/typing-tests");
   if (!response.ok) {
-    throw new Error('Failed to fetch tests');
+    throw new Error("Failed to fetch tests");
   }
   return response.json();
 }
@@ -34,30 +32,33 @@ export async function getTestById(id: string): Promise<TypingTest | null> {
     if (response.status === 404) {
       return null;
     }
-    throw new Error('Failed to fetch test');
+    throw new Error("Failed to fetch test");
   }
   return response.json();
 }
 
 export async function addTest(text: string): Promise<TypingTest> {
-  const response = await fetch('/api/typing-tests', {
-    method: 'POST',
+  const response = await fetch("/api/typing-tests", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ text }),
   });
   if (!response.ok) {
-    throw new Error('Failed to add test');
+    throw new Error("Failed to add test");
   }
   return response.json();
 }
 
-export async function updateTest(id: string, text: string): Promise<TypingTest | null> {
+export async function updateTest(
+  id: string,
+  text: string
+): Promise<TypingTest | null> {
   const response = await fetch(`/api/typing-tests/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ text }),
   });
@@ -65,29 +66,32 @@ export async function updateTest(id: string, text: string): Promise<TypingTest |
     if (response.status === 404) {
       return null;
     }
-    throw new Error('Failed to update test');
+    throw new Error("Failed to update test");
   }
   return response.json();
 }
 
 export async function deleteTest(id: string): Promise<boolean> {
   const response = await fetch(`/api/typing-tests/${id}`, {
-    method: 'DELETE',
+    method: "DELETE",
   });
   if (!response.ok) {
     if (response.status === 404) {
       return false;
     }
-    throw new Error('Failed to delete test');
+    throw new Error("Failed to delete test");
   }
   return true;
 }
 
-export async function addLog(testId: string, log: Omit<TypingLog, 'id' | 'createdAt'>): Promise<TypingLog | null> {
+export async function addLog(
+  testId: string,
+  log: Omit<TypingLog, "id" | "createdAt">
+): Promise<TypingLog | null> {
   const response = await fetch(`/api/typing-tests/${testId}/logs`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(log),
   });
@@ -95,7 +99,7 @@ export async function addLog(testId: string, log: Omit<TypingLog, 'id' | 'create
     if (response.status === 404) {
       return null;
     }
-    throw new Error('Failed to add log');
+    throw new Error("Failed to add log");
   }
   return response.json();
-} 
+}

@@ -1,0 +1,31 @@
+// This is your Prisma schema file
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./.generated/prisma"
+}
+
+model TypingTest {
+  id        String     @id @default(cuid())
+  text      String
+  createdAt DateTime   @default(now())
+  timesUsed Int       @default(0)
+  logs      TypingLog[]
+}
+
+model TypingLog {
+  id        String     @id @default(cuid())
+  userId    String
+  wpm       Float
+  accuracy  Float
+  errors    Int
+  duration  Int
+  createdAt DateTime   @default(now())
+  test      TypingTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+  testId    String
+}

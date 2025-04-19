@@ -23,6 +23,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { format } from "date-fns";
 import { getAllTests, addTest, deleteTest } from "@/lib/typing-tests";
+import { adminLogoutAction } from "@/app/actions/admin-logout";
 
 type TypingTest = {
   id: string;
@@ -40,13 +41,6 @@ export default function AdminDashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    // Check authentication
-    const isAuthenticated = localStorage.getItem("adminAuth");
-    if (!isAuthenticated) {
-      router.push("/admin");
-      return;
-    }
-
     // Fetch tests from JSON file
     const fetchTests = async () => {
       try {
@@ -63,7 +57,7 @@ export default function AdminDashboard() {
   }, [router]);
 
   const handleLogout = () => {
-    localStorage.removeItem("adminAuth");
+    adminLogoutAction();
     router.push("/admin");
   };
 
@@ -155,9 +149,7 @@ export default function AdminDashboard() {
           <TableBody>
             {filteredTests.map((test) => (
               <TableRow key={test.id}>
-                <TableCell className="max-w-md truncate">
-                  {test.text}
-                </TableCell>
+                <TableCell className="max-w-md truncate">{test.text}</TableCell>
                 <TableCell>
                   {format(new Date(test.createdAt), "MMM d, yyyy HH:mm")}
                 </TableCell>
@@ -187,4 +179,4 @@ export default function AdminDashboard() {
       </div>
     </div>
   );
-} 
+}

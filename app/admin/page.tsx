@@ -4,7 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -14,10 +20,29 @@ export default function AdminLogin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement proper authentication
-    if (username === "admin" && password === "admin1231@") {
-      localStorage.setItem("adminAuth", "true");
-      router.push("/admin/dashboard");
+    console.log(username, password, "Call");
+
+    if (username === "admin" && password) {
+      // Call api to auth admin
+      fetch("/api/admin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+          } else {
+            router.push("/admin/dashboard");
+          }
+        })
+        .catch((err) => {
+          console.error("Login failed", err);
+          setError("Login failed");
+        });
     } else {
       setError("Invalid credentials");
     }
@@ -28,7 +53,9 @@ export default function AdminLogin() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Admin Login</CardTitle>
-          <CardDescription>Enter your credentials to access the admin dashboard</CardDescription>
+          <CardDescription>
+            Enter your credentials to access the admin dashboard
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
@@ -67,4 +94,4 @@ export default function AdminLogin() {
       </Card>
     </div>
   );
-} 
+}
