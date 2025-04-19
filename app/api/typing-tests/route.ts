@@ -47,6 +47,7 @@ export async function PUT(request: Request) {
     });
     return NextResponse.json(updatedTest);
   } catch (error) {
+    console.error("Failed to create log:", error);
     return NextResponse.json({ error: "Test not found" }, { status: 404 });
   }
 }
@@ -60,6 +61,7 @@ export async function DELETE(request: Request) {
     });
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error("Failed to create log:", error);
     return NextResponse.json({ error: "Test not found" }, { status: 404 });
   }
 }

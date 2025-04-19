@@ -29,6 +29,7 @@ export async function POST(
 
     return NextResponse.json(log);
   } catch (error) {
+    console.error("Failed to create log:", error);
     return NextResponse.json(
       { error: "Failed to create log" },
       { status: 500 }
@@ -50,6 +51,7 @@ export async function GET(
 
     return NextResponse.json(logs);
   } catch (error) {
+    console.error("Failed to create log:", error);
     return NextResponse.json(
       { error: "Failed to fetch logs" },
       { status: 500 }
