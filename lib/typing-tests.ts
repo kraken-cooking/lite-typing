@@ -88,7 +88,7 @@ export async function addLog(
   testId: string,
   log: Omit<TypingLog, "id" | "createdAt">
 ): Promise<TypingLog | null> {
-  const response = await fetch(`/api/typing-tests/${testId}/logs`, {
+  const response = await fetch(`/api/random/${testId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

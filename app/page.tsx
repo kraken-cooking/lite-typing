@@ -11,13 +11,10 @@ export default function Home() {
   useEffect(() => {
     const fetchRandomTest = async () => {
       try {
-        const response = await fetch("/api/typing-tests");
+        const response = await fetch("/api/random");
         if (!response.ok) throw new Error("Failed to fetch tests");
-        const tests = await response.json();
-        if (tests.length > 0) {
-          const randomTest = tests[Math.floor(Math.random() * tests.length)];
-          setTestId(randomTest.id);
-        }
+        const test = await response.json();
+        setTestId(test.id);
       } catch (error) {
         console.error("Error fetching tests:", error);
         toast.error("Failed to load typing test. Please try again.");
@@ -27,7 +24,11 @@ export default function Home() {
     fetchRandomTest();
   }, []);
 
-  const handleTestComplete = async (stats: { wpm: number; accuracy: number; errors: number }) => {
+  const handleTestComplete = async (stats: {
+    wpm: number;
+    accuracy: number;
+    errors: number;
+  }) => {
     if (!testId) return;
 
     try {
@@ -50,9 +51,9 @@ export default function Home() {
     <main className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-4xl">
         <div className="flex flex-col items-center mb-8">
-          <img 
-            src="/logo.png" 
-            alt="Lite Typing Test Logo" 
+          <img
+            src="/logo.png"
+            alt="Lite Typing Test Logo"
             className="w-24 h-24 mb-4"
             width={96}
             height={96}

@@ -55,13 +55,10 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
   useEffect(() => {
     const fetchRandomTest = async () => {
       try {
-        const response = await fetch("/api/typing-tests");
+        const response = await fetch("/api/random");
         if (!response.ok) throw new Error("Failed to fetch tests");
-        const tests = await response.json();
-        if (tests.length > 0) {
-          const randomTest = tests[Math.floor(Math.random() * tests.length)];
-          setState((prev) => ({ ...prev, text: randomTest.text }));
-        }
+        const test = await response.json();
+        setState((prev) => ({ ...prev, text: test.text }));
       } catch (error) {
         console.error("Error fetching tests:", error);
       }
@@ -90,8 +87,11 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
     // - Maximum penalty: 50% of raw WPM
     const basePenalty = errorRate * 100 * 3;
     const additionalPenalty = Math.max(0, (errorRate * 100 - 5) * 2);
-    const totalPenalty = Math.min(basePenalty + additionalPenalty, rawWpm * 0.5);
-    
+    const totalPenalty = Math.min(
+      basePenalty + additionalPenalty,
+      rawWpm * 0.5
+    );
+
     const adjustedWpm = Math.max(0, Math.round(rawWpm - totalPenalty));
 
     const accuracy = Math.round(((chars - state.errors) / chars) * 100);
@@ -152,22 +152,19 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
 
   const handleNextTest = async () => {
     try {
-      const response = await fetch("/api/typing-tests");
+      const response = await fetch("/api/random");
       if (!response.ok) throw new Error("Failed to fetch tests");
-      const tests = await response.json();
-      if (tests.length > 0) {
-        const randomTest = tests[Math.floor(Math.random() * tests.length)];
-        setState({
-          text: randomTest.text,
-          input: "",
-          startTime: null,
-          endTime: null,
-          errors: 0,
-          isComplete: false,
-          currentWordIndex: 0,
-        });
-        setElapsedTime(0);
-      }
+      const test = await response.json();
+      setState({
+        text: test.text,
+        input: "",
+        startTime: null,
+        endTime: null,
+        errors: 0,
+        isComplete: false,
+        currentWordIndex: 0,
+      });
+      setElapsedTime(0);
     } catch (error) {
       console.error("Error fetching new test:", error);
     }
@@ -197,9 +194,7 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="flex flex-col items-center relative">
             <span className="text-sm text-muted-foreground">WPM</span>
-            <span className="text-2xl font-bold">
-              {wpm}
-            </span>
+            <span className="text-2xl font-bold">{wpm}</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-sm text-muted-foreground">Accuracy</span>
