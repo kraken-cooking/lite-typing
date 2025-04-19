@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -41,12 +41,14 @@ type TestDetails = {
   logs: TypingLog[];
 };
 
-export default function TestDetails({ params }: { params: { id: string } }) {
+export default function TestDetails() {
   const [test, setTest] = useState<TestDetails | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+
+  const params = useParams<{ id: string; }>()
 
   useEffect(() => {
     // Check authentication

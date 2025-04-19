@@ -31,6 +31,7 @@ async function readDataFile(): Promise<DataFile> {
     const data = await fs.readFile(DATA_FILE, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
+    console.log(error)
     return { tests: [] };
   }
 }
@@ -41,10 +42,11 @@ async function writeDataFile(data: DataFile) {
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const data = await readDataFile();
-  const test = data.tests.find(test => test.id === params.id);
+  const {id} = await params
+  const test = data.tests.find(test => test.id === id);
   
   if (!test) {
     return NextResponse.json({ error: 'Test not found' }, { status: 404 });
@@ -55,12 +57,13 @@ export async function GET(
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const logData = await request.json();
   const data = await readDataFile();
+  const {id} = await params
   
-  const testIndex = data.tests.findIndex(test => test.id === params.id);
+  const testIndex = data.tests.findIndex(test => test.id === id);
   if (testIndex === -1) {
     return NextResponse.json({ error: 'Test not found' }, { status: 404 });
   }

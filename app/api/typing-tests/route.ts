@@ -31,6 +31,7 @@ async function readDataFile(): Promise<DataFile> {
     const data = await fs.readFile(DATA_FILE, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
+    console.log(error)
     return { tests: [] };
   }
 }

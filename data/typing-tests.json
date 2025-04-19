@@ -74,7 +74,7 @@
       "id": "1744847551306",
       "text": "Leaves crunch underfoot as you walk along a forest trail. Sunlight filters through the canopy, casting dancing shadows on the ground. The air smells of pine and earth, and birds sing from above. A walk in the forest is peaceful, grounding, and full of quiet discoveries.",
       "createdAt": "2025-04-16T23:52:31.306Z",
-      "timesUsed": 1,
+      "timesUsed": 3,
       "logs": [
         {
           "userId": "anonymous",
@@ -84,6 +84,24 @@
           "duration": 60,
           "id": "1744936189096",
           "createdAt": "2025-04-18T00:29:49.096Z"
+        },
+        {
+          "userId": "anonymous",
+          "wpm": 48,
+          "accuracy": 100,
+          "errors": 0,
+          "duration": 60,
+          "id": "1745036671190",
+          "createdAt": "2025-04-19T04:24:31.190Z"
+        },
+        {
+          "userId": "anonymous",
+          "wpm": 56,
+          "accuracy": 99,
+          "errors": 2,
+          "duration": 60,
+          "id": "1745036972998",
+          "createdAt": "2025-04-19T04:29:32.998Z"
         }
       ]
     },
